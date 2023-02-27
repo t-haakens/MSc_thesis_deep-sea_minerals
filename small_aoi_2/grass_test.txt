@@ -1,0 +1,29 @@
+#### GRASS terminal test  ####
+
+# Read DEM
+C:\Users\HP\uio.prog\MSc\small_aoi\whitebox_test>r.import input="C:\Users\HP\uio.prog\MSc\small_aoi\whitebox_test\data_in\Bathy_small_aoi_25m.tif" output="Bathy_small_aoi_25m"
+
+# Set the region to match the extent of your DEM
+g.region raster=Bathy_small_aoi_25m
+
+# Calculate slope and hillshade
+r.slope.aspect elevation=Bathy_small_aoi_25m slope=slope
+r.relief input=Bathy_small_aoi_25m output=hillshade altitude=30 azimuth=315
+
+# Setup monitor + display
+d.mon wx0
+d.rast slope
+
+
+# Export files
+r.out.gdal input=slope output=C:\Users\HP\Documents\grassdata\MohnsRidge\data_out\slope.tif format=GTiff
+r.out.gdal input=hillshade output=C:\Users\HP\Documents\grassdata\MohnsRidge\data_out\hillshade.tif format=GTiff
+
+# Read + display exported files
+r.in.gdal input=C:\Users\HP\Documents\grassdata\MohnsRidge\data_out\slope.tif output=slope_grass
+r.in.gdal input=C:\Users\HP\Documents\grassdata\MohnsRidge\data_out\hillshade.tif output=hillshade_grass
+
+d.mon wx0
+d.rast hillshade_grass
+d.rast slope_grass
+

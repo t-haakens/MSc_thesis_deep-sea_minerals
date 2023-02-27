@@ -1,0 +1,23 @@
+#### SAGA terminal test  ####
+# cmd terminal
+
+# SAGA executable location
+C:\Program Files\SAGA\saga-8.5.1_x64
+# open cmd terminal from sagadata/MohnsRigde folder
+
+# open SAGA GIS terminal
+saga_cmd
+
+# path to DEM
+"C:\Users\HP\Documents\sagadata\MohnsRidge\data_in\Bathy_small_aoi_25m.tif"
+
+
+# inspecting tools in Terrain Analysis (ta) ta_preprocessor
+saga_cmd ta_preprocessor
+
+# gdal info about DEM
+saga_cmd io_gdal 0 -FILES="data_in\Bathy_small_aoi_25m.tif"
+
+# Calculate and export Slope and Aspect from DEM
+saga_cmd ta_morphometry 0 -ELEVATION="data_in\Bathy_small_aoi_25m.tif" -SLOPE="data_out\slope.tif" -ASPECT="data_out\aspect.tif"
+
